@@ -37,7 +37,7 @@ public class BookController {
         try {
             Book book = bookService.getById(id);
             return new ResponseEntity<>(book, HttpStatus.OK);
-        }catch(Exception ex) {
+        }catch(Exception exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
