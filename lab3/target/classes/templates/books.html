@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <title>Book shop</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script src="js/books.js"></script>
+        <style>
+             body,  button {
+             background: #fdf5e6;
+             font-family: "Trebuchet MS", Verdana, sans-serif;
+            }
+            div {
+            padding: 3px;
+
+            }
+            h1{
+            padding-left: 10px;
+            font-size: 60px;
+            font-weight: 600;
+            color: #8B4513;
+            text-shadow: 0px 0px 5px #DEB887, 0px 0px 10px #DEB887, 0px 0px 10px #DEB887, 0px 0px 20px #DEB887;
+            }
+        </style>
+    </head>
+    <body background='#FDF5E6' ng-app="books" ng-controller="BooksController">
+
+        <h1>Книги</h1>
+
+        <div ng-controller="getBooks" ng-show="booksList.length > 0">
+            <table cellspacing='10' cellpadding='5' id="booksTable">
+                <thead>
+                    <tr>
+                        <th>ИД</th>
+                        <th>Название</th>
+                        <th>Автор</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="book in booksList" id="{{book.id}}">
+                        <td>{{book.id}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td><input type="button" value="Удалить" ng-click="delete(book.id)"/></td>
+                        <td><input type="button" value="Редактировать" ng-click="setUpdateParam(book)"/></td> <!-- update(book.id) -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <form role="form" ng-submit="book_id==-1 ? add() : update()" novalidate> <!-- addBook() saveBook(book.id)-->
+                <div>
+                    <label>Название</label>
+                    <div>
+                        <input type="text" name="text" ng-model="title" />
+                    </div>
+                </div>
+                <div >
+                    <label >Автор</label>
+                    <div>
+                        <input type="text" name="name" ng-model="author" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input type="submit" value="Сохранить"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
